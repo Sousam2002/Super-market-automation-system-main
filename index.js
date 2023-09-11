@@ -20,9 +20,9 @@ const { isLoggedIn } = require("./middleware");
 const MongoStore =require('connect-mongo');
 const mongo_url=process.env.MONGO_URL
 // ||"mongodb://127.0.0.1:27017/supermarket"
-console.log(mongo_url)
+// console.log(mongo_url)
 // mongoose.connect("mongodb://127.0.0.1:27017/supermarket", {
-  mongoose.connect(mongo_url, {
+  mongoose.connect("mongodb+srv://samantasouhardya14285:sousam@cluster0.yxn8vjf.mongodb.net/test", {
 
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -42,7 +42,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 const store=new MongoStore({
   // mongoUrl:"mongodb://127.0.0.1:27017/supermarket",
-  mongoUrl:mongo_url,
+  mongoUrl:"mongodb+srv://samantasouhardya14285:sousam@cluster0.yxn8vjf.mongodb.net/test",
   secret:"supermarketapp",
   touchAfter:24*60*60,
 })

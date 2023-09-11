@@ -14,8 +14,9 @@ const User = require("./models/user");
 const Item = require("./models/item");
 const Sales = require("./models/sales");
 const { isLoggedIn } = require("./middleware");
+const mongo_url=process.env.MONGO_URL||"mongodb://127.0.0.1:27017/supermarket"
 
-mongoose.connect("mongodb://127.0.0.1:27017/supermarket", {
+mongoose.connect(mongo_url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV!=='production'){
+  require('dotenv').config()
+}
 const express = require("express");
 const path = require("path");
 const ejsMate = require("ejs-mate");
@@ -14,10 +17,13 @@ const User = require("./models/user");
 const Item = require("./models/item");
 const Sales = require("./models/sales");
 const { isLoggedIn } = require("./middleware");
+const MongoStore =require('connect-mongo');
 const mongo_url=process.env.MONGO_URL
 // ||"mongodb://127.0.0.1:27017/supermarket"
+console.log(mongo_url)
+// mongoose.connect("mongodb://127.0.0.1:27017/supermarket", {
+  mongoose.connect(mongo_url, {
 
-mongoose.connect(mongo_url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -34,10 +40,19 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
-
+const store=new MongoStore({
+  // mongoUrl:"mongodb://127.0.0.1:27017/supermarket",
+  mongoUrl:mongo_url,
+  secret:"supermarketapp",
+  touchAfter:24*60*60,
+})
+store.on('error',(e)=>{
+  console.log('session store me error hai')
+})
 const sessionConfig = {
+  store,
   secret: "supermarketapp",
-  resave: false,
+  resave: true,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
@@ -254,7 +269,7 @@ app.post('/bill',isLoggedIn,async(req,res)=>{
           date:date,
         })
         await sell.save()
-        console.log(q)
+        // console.log(q)
     }
     // console.log(bill_items)
     

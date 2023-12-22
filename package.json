@@ -4,7 +4,8 @@
   "description": "Course project for software engineering  lab",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "fa-icons": "^0.2.0",
     "font-awesome": "^4.7.0",
     "mongoose": "^7.0.2",
+    "nodemon": "^3.0.2",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",

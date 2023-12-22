@@ -78,20 +78,21 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("login");
+  // res.render("home");
 });
 
 // authentications
 
 app.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login")
 });
 
 app.post(
   "/login",
   passport.authenticate("local", {
     failureFlash: true,
-    failureRedirect: "/login",
+    failureRedirect: "/",
   }),
   async (req, res) => {
     req.flash("success", "Welcome back!");
